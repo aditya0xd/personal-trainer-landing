@@ -1,22 +1,24 @@
-const stickyCTA = document.querySelector('.sticky-cta');
-const heroSection = document.querySelector('.hero');
-const finalCTASection = document.querySelector('.final-cta');
+const floatingCTA = document.querySelector('.floating-cta, cta');
+const floatingDot = document.querySelector('.floating-dot');
+const floatingAction = document.querySelector('.floating-action');
 
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const heroBottom = heroSection.offsetHeight;
-  const finalCTATop = finalCTASection.offsetTop - window.innerHeight;
 
-  if (scrollY > heroBottom * 0.8 && scrollY < finalCTATop) {
-    stickyCTA.classList.add('visible');
-  } else {
-    stickyCTA.classList.remove('visible');
+floatingDot.addEventListener('click', () => {
+  floatingCTA.classList.toggle('open');
+});
+
+floatingAction.addEventListener('click', () => {
+  window.open('https://calendly.com/your-link', '_blank');
+});
+
+document.addEventListener('click', (e) => {
+  if (!floatingCTA.contains(e.target)) {
+    floatingCTA.classList.remove('open');
   }
 });
 
 
-
-document.querySelectorAll('.cta, .sticky-cta').forEach(btn => {
+document.querySelectorAll('.cta').forEach(btn => {
   btn.addEventListener('click', () => {
     window.open('https://calendly.com/your-link', '_blank');
   });
